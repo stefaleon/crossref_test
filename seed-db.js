@@ -1,13 +1,10 @@
 const fetchData = require("./fetchData");
-const connectToDb = require("./db");
 const Publication = require("./models/Publication");
 
 const seedDb = async () => {
   try {
-    await connectToDb();
-
     const items = await fetchData();
-
+    console.log("Adding items...");
     items.forEach(async item => {
       const newPublication = new Publication({
         doi: item.DOI,
@@ -16,6 +13,7 @@ const seedDb = async () => {
       });
 
       await newPublication.save();
+      console.log(".");
     });
   } catch (err) {
     console.error(err.message);
@@ -23,5 +21,5 @@ const seedDb = async () => {
   }
 };
 
+require("./db");
 seedDb();
-// module.exports = seedDb;
