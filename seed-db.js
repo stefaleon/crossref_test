@@ -1,25 +1,21 @@
 const fetchData = require("./fetchData");
 const Publication = require("./models/Publication");
+const seed = require("./seed");
 
 const seedDb = async () => {
   try {
     const items = await fetchData();
-    console.log("Adding items...");
-    items.forEach(async item => {
-      const newPublication = new Publication({
-        doi: item.DOI,
-        title: item.title[0],
-        issn: item.ISSN
-      });
-
-      await newPublication.save();
-      console.log(".");
-    });
+    seed(items);
   } catch (err) {
     console.error(err.message);
     process.exit(1);
   }
 };
 
-require("./db");
-seedDb();
+const doSeed = async () => {
+  require("./db");
+  await Publication.deleteMany();
+  seedDb();
+};
+
+doSeed();

@@ -7,7 +7,8 @@
     "start": "node server.js",
     "dev": "env-cmd -f ./config/.env.dev nodemon server.js",
     "seed": "env-cmd -f ./config/.env.dev node seed-db.js",
-    "test": "env-cmd -f ./config/.env.test jest"
+    "test": "env-cmd -f ./config/.env.test jest",
+    "seedtest": "env-cmd -f ./config/.env.test node seed-db.js"
   },
   "jest": {
     "testEnvironment": "node"

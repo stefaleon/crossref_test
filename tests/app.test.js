@@ -18,7 +18,7 @@ xtest("verify the punchline for the main route (GET /)", async () => {
   expect(textJson.msg).toEqual("This is the Publications API");
 });
 
-test("get 200 for the articles route (GET /articles)", async () => {
+xtest("get 200 for the articles route (GET /articles)", async () => {
   await request(app)
     .get("/articles")
     .expect(200);
@@ -28,4 +28,19 @@ xtest("get 404 for non existing routes", async () => {
   await request(app)
     .get("/non-existing-endpoint")
     .expect(404);
+});
+
+xtest("verify a fetched article's doi data type", async () => {
+  const res = await request(app).get("/articles");
+  expect(typeof res.body[0].doi).toBe("string");
+});
+
+xtest("verify a fetched article's issn data type", async () => {
+  const res = await request(app).get("/articles");
+  expect(typeof res.body[0].issn).toBe("object");
+});
+
+xtest("verify a fetched article's title data type", async () => {
+  const res = await request(app).get("/articles");
+  expect(typeof res.body[0].title).toBe("string");
 });
