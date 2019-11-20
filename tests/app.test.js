@@ -30,17 +30,17 @@ xtest("get 404 for non existing routes", async () => {
     .expect(404);
 });
 
-xtest("verify a fetched article's doi data type", async () => {
+test("verify a fetched article's doi data type", async () => {
   const res = await request(app).get("/articles");
   expect(typeof res.body[0].doi).toBe("string");
 });
 
-xtest("verify a fetched article's issn data type", async () => {
+test("verify a fetched article's issn data type", async () => {
   const res = await request(app).get("/articles");
   expect(typeof res.body[0].issn).toBe("object");
 });
 
-xtest("verify a fetched article's title data type", async () => {
+test("verify a fetched article's title data type", async () => {
   const res = await request(app).get("/articles");
   expect(typeof res.body[0].title).toBe("string");
 });

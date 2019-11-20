@@ -15,7 +15,8 @@ const seedDb = async () => {
 const doSeed = async () => {
   require("./db");
   await Publication.deleteMany();
-  seedDb();
+  const msg = await seedDb();
+  console.log(msg);
 };
 
 doSeed();
